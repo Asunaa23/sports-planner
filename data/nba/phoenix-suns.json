@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "sport": "nba",
+  "updatedAt": "2026-08-06T02:50:28.881Z",
+  "range": {
+    "start": "2026-08-06",
+    "end": "2026-12-04"
+  },
+  "team": {
+    "id": 24,
+    "slug": "phoenix-suns",
+    "name": "Phoenix Suns",
+    "abbreviation": "PHX"
+  },
+  "games": []
+}

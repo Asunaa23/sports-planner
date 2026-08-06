@@ -3,7 +3,8 @@
     {
       "sport": "nba",
       "provider": "balldontlie",
-      "slug": "phoenix-suns"
+      "slug": "phoenix-suns",
+      "abbreviation": "PHX"
     }
   ]
 }

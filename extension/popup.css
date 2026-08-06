@@ -1,0 +1,36 @@
+body {
+  width: 350px;
+  min-height: 300px;
+  margin: 0;
+  padding: 16px;
+
+  font-family: Arial, sans-serif;
+
+  background: #111;
+  color: white;
+}
+
+h1 {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+#status {
+  color: #aaa;
+  margin-bottom: 16px;
+}
+
+.game {
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+}
+
+.game-date {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.game-opponent {
+  font-size: 16px;
+  margin-top: 4px;
+}

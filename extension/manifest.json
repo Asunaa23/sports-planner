@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Sports Planner",
+  "version": "0.1.0",
+  "description": "See upcoming games from your favorite sports teams.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Sports Planner"
+  },
+  "host_permissions": [
+    "https://raw.githubusercontent.com/*"
+  ]
+}

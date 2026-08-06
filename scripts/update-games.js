@@ -1,18 +1,17 @@
 import "dotenv/config";
-import fs from "node:fs/promises";
 
 import {
   getTeams,
-  getGames,
+  getAllGames,
 } from "./providers/nba/balldontlie.js";
 
 import {
+  normalizeTeam,
   normalizeGame,
 } from "./normalizers/nba.js";
 
-import {
-  writeTeamData,
-} from "./writer.js";
+import fs from "node:fs/promises";
+import path from "node:path";
 
 const apiKey = process.env.BALLDONTLIE_API_KEY;
 
@@ -21,115 +20,122 @@ if (!apiKey) {
   process.exit(1);
 }
 
-// Load project configuration
-const config = JSON.parse(
-  await fs.readFile("./config/teams.json", "utf8")
-);
+// BALLDONTLIE IDs for the 30 current NBA franchises.
+const ACTIVE_NBA_TEAM_IDS = new Set([
+  1, 2, 3, 4, 5,
+  6, 7, 8, 9, 10,
+  11, 12, 13, 14, 15,
+  16, 17, 18, 19, 20,
+  21, 22, 23, 24, 25,
+  26, 27, 28, 29, 30,
+]);
 
-// Date range: today → 120 days
-const today = new Date();
-
-const end = new Date();
-end.setDate(end.getDate() + 120);
-
-const startDate = today.toISOString().split("T")[0];
-const endDate = end.toISOString().split("T")[0];
+function formatDate(date) {
+  return date.toISOString().split("T")[0];
+}
 
 console.log("🏀 Sports Planner");
 console.log("📡 Connecting to BALLDONTLIE...");
-console.log(`📅 Date range: ${startDate} → ${endDate}`);
 
 try {
-  // Fetch NBA teams once
-  const nbaTeams = await getTeams(apiKey);
+  // --------------------------------------------------
+  // Date range
+  // --------------------------------------------------
 
-  // Process every configured team
-  for (const teamConfig of config.teams) {
-    console.log("");
-    console.log(`🔄 Updating ${teamConfig.slug}...`);
+  const today = new Date();
 
-    // V1 currently supports NBA + BALLDONTLIE
-    if (
-      teamConfig.sport !== "nba" ||
-      teamConfig.provider !== "balldontlie"
-    ) {
-      console.warn(
-        `⚠️ Unsupported configuration: ${teamConfig.sport}/${teamConfig.provider}`
-      );
-      continue;
-    }
+  const end = new Date(today);
+  end.setDate(end.getDate() + 120);
 
-    // Find team from provider
-    const team = nbaTeams.find(
-      (nbaTeam) =>
-        nbaTeam.abbreviation === teamConfig.abbreviation
+  const startDate = formatDate(today);
+  const endDate = formatDate(end);
+
+  console.log(`📅 Date range: ${startDate} → ${endDate}`);
+
+  // --------------------------------------------------
+  // Teams
+  // --------------------------------------------------
+
+  console.log("\n👥 Fetching NBA teams...");
+
+  const rawTeams = await getTeams(apiKey);
+
+  const teams = rawTeams
+    .filter((team) => ACTIVE_NBA_TEAM_IDS.has(team.id))
+    .map(normalizeTeam)
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  console.log(`✅ ${teams.length} active NBA teams found`);
+
+  if (teams.length !== 30) {
+    console.warn(
+      `⚠️ Expected 30 active NBA teams, received ${teams.length}.`
     );
-
-    if (!team) {
-      console.warn(
-        `⚠️ Team not found: ${teamConfig.slug}`
-      );
-      continue;
-    }
-
-    console.log(`✅ Found ${team.full_name}`);
-
-    // Fetch games
-    const rawGames = await getGames(
-      apiKey,
-      team.id,
-      startDate,
-      endDate
-    );
-
-    console.log(`📦 ${rawGames.length} games found`);
-
-    // Convert provider format → Sports Planner format
-    const games = rawGames
-      .map((game) => normalizeGame(game, team))
-      .sort(
-        (a, b) =>
-          new Date(a.datetime) - new Date(b.datetime)
-      );
-
-    // Final public JSON format
-    const data = {
-      schemaVersion: 1,
-
-      sport: teamConfig.sport,
-
-      updatedAt: new Date().toISOString(),
-
-      range: {
-        start: startDate,
-        end: endDate,
-      },
-
-      team: {
-        id: team.id,
-        slug: teamConfig.slug,
-        name: team.full_name,
-        abbreviation: team.abbreviation,
-      },
-
-      games,
-    };
-
-    // Write public JSON
-    const filePath = await writeTeamData(
-      teamConfig.sport,
-      teamConfig.slug,
-      data
-    );
-
-    console.log(`💾 Written: ${filePath}`);
   }
 
-  console.log("");
-  console.log("🎉 All teams updated!");
+  // --------------------------------------------------
+  // Games
+  // --------------------------------------------------
+
+  console.log("\n🏀 Fetching NBA schedule...");
+
+  const rawGames = await getAllGames(
+    apiKey,
+    startDate,
+    endDate
+  );
+
+  const games = rawGames
+    .map(normalizeGame)
+    .sort(
+      (a, b) =>
+        new Date(a.datetime) - new Date(b.datetime)
+    );
+
+  console.log(`\n✅ ${games.length} games found`);
+
+  // --------------------------------------------------
+  // Sports Planner JSON
+  // --------------------------------------------------
+
+  const data = {
+    schemaVersion: 2,
+
+    sport: "nba",
+
+    updatedAt: new Date().toISOString(),
+
+    range: {
+      start: startDate,
+      end: endDate,
+    },
+
+    teams,
+
+    games,
+  };
+
+  // --------------------------------------------------
+  // Write
+  // --------------------------------------------------
+
+  const directory = path.join("data", "nba");
+  const filePath = path.join(directory, "schedule.json");
+
+  await fs.mkdir(directory, {
+    recursive: true,
+  });
+
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(data, null, 2),
+    "utf8"
+  );
+
+  console.log(`💾 Written: ${filePath}`);
+  console.log("\n🎉 NBA schedule update complete!");
 
 } catch (error) {
-  console.error("");
-  console.error("❌ Update failed:", error.message);
+  console.error("\n❌ Error:", error.message);
   process.exit(1);
 }

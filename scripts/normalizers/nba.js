@@ -1,25 +1,35 @@
-export function normalizeGame(game, team) {
-  const isHome = game.home_team.id === team.id;
+export function normalizeTeam(team) {
+  return {
+    id: team.id,
+    name: team.full_name,
+    abbreviation: team.abbreviation,
+    city: team.city,
+    conference: team.conference,
+    division: team.division,
+  };
+}
 
-  const opponent = isHome
-    ? game.visitor_team
-    : game.home_team;
-
+export function normalizeGame(game) {
   return {
     id: game.id,
     date: game.date,
     datetime: game.datetime,
     season: game.season,
 
-    home: isHome,
+    home: {
+      id: game.home_team.id,
+      name: game.home_team.full_name,
+      abbreviation: game.home_team.abbreviation,
+    },
 
-    opponent: {
-      id: opponent.id,
-      name: opponent.full_name,
-      abbreviation: opponent.abbreviation,
+    away: {
+      id: game.visitor_team.id,
+      name: game.visitor_team.full_name,
+      abbreviation: game.visitor_team.abbreviation,
     },
 
     status: game.status,
+    postseason: game.postseason,
     postponed: game.postponed,
   };
 }

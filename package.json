@@ -1,6 +1,6 @@
 {
   "name": "sports-planner",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Open-source browser extension to track upcoming games.",
   "type": "module",
   "scripts": {

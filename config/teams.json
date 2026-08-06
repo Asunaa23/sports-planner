@@ -1,0 +1,9 @@
+{
+  "teams": [
+    {
+      "sport": "nba",
+      "provider": "balldontlie",
+      "slug": "phoenix-suns"
+    }
+  ]
+}

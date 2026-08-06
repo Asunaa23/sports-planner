@@ -1,0 +1,20 @@
+{
+  "name": "sports-planner",
+  "version": "1.0.0",
+  "description": "Open-source browser extension to track upcoming games.",
+  "type": "module",
+  "scripts": {
+    "update": "node scripts/update-games.js"
+  },
+  "keywords": [
+    "nba",
+    "sports",
+    "extension",
+    "browser"
+  ],
+  "author": "TonPseudoGitHub",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

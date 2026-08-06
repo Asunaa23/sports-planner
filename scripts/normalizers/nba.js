@@ -27,6 +27,11 @@ export function normalizeGame(game) {
       name: game.visitor_team.full_name,
       abbreviation: game.visitor_team.abbreviation,
     },
+   
+    score: {
+      home: game.home_team_score ?? null,
+      away: game.visitor_team_score ?? null,
+    },
 
     status: game.status,
     postseason: game.postseason,

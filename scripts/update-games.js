@@ -42,13 +42,15 @@ try {
   // Date range
   // --------------------------------------------------
 
-  const today = new Date();
+ // TEMPORARY DEVELOPMENT DATA
+// Real NBA games used to build and test the extension UI.
+const today = new Date();
 
-  const end = new Date(today);
-  end.setDate(end.getDate() + 120);
+const end = new Date(today);
+end.setDate(end.getDate() + 120);
 
-  const startDate = formatDate(today);
-  const endDate = formatDate(end);
+const startDate = today.toISOString().split("T")[0];
+const endDate = end.toISOString().split("T")[0];
 
   console.log(`📅 Date range: ${startDate} → ${endDate}`);
 

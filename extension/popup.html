@@ -11,20 +11,62 @@
 
 <body>
   <main>
-    <header>
-      <h1>🏀 Sports Planner</h1>
-      <div id="status">Chargement...</div>
+
+    <header class="app-header">
+      <div>
+        <h1 class="brand">
+          <img src="icons/icon512.png" alt="">
+          Sports Planner
+        </h1>
+
+        <div id="status">Chargement...</div>
+      </div>
     </header>
 
-    <section class="filters">
-      <button id="filter-toggle" type="button">
-        Toutes les équipes
-        <span>⌄</span>
+    <!-- 1. SPORT -->
+    <section class="control-section">
+      <span class="control-title">SPORT</span>
+
+      <button id="sport-selector" class="selector" type="button">
+        <span>
+          <strong>NBA</strong>
+          <small>Basketball</small>
+        </span>
+
+        <span class="chevron">⌄</span>
+      </button>
+    </section>
+
+    <!-- 2. DAY -->
+    <section class="control-section">
+      <span class="control-title">JOUR</span>
+
+      <nav class="date-navigation">
+        <button id="previous-day" class="date-arrow" type="button">
+          ‹
+        </button>
+
+        <div id="date-strip"></div>
+
+        <button id="next-day" class="date-arrow" type="button">
+          ›
+        </button>
+      </nav>
+    </section>
+
+    <!-- 3. TEAMS -->
+    <section class="control-section filters">
+      <span class="control-title">ÉQUIPES</span>
+
+      <button id="filter-toggle" class="selector" type="button">
+        <span id="filter-label">Toutes les équipes</span>
+        <span class="chevron">⌄</span>
       </button>
 
       <div id="filter-panel" class="filter-panel hidden">
+
         <div class="filter-header">
-          <strong>Équipes</strong>
+          <strong>Filtrer les équipes</strong>
 
           <button id="clear-filter" type="button">
             Tout afficher
@@ -42,7 +84,17 @@
       </div>
     </section>
 
-    <div id="games"></div>
+    <!-- 4. GAMES -->
+    <section class="games-section">
+
+      <div class="games-header">
+        <span class="control-title">MATCHS</span>
+        <span id="selected-date-label"></span>
+      </div>
+
+      <div id="games"></div>
+    </section>
+
   </main>
 
   <script src="popup.js"></script>

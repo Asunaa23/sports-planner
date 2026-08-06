@@ -2,16 +2,28 @@
   "manifest_version": 3,
   "name": "Sports Planner",
   "version": "0.1.0",
-  "description": "See upcoming games from your favorite sports teams.",
+  "description": "Track schedules and results from your favorite sports teams.",
 
   "permissions": [
     "storage"
   ],
-  
+
+  "icons": {
+    "16": "icons/icon512.png",
+    "32": "icons/icon512.png",
+    "48": "icons/icon512.png",
+    "128": "icons/icon512.png"
+  },
+
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Sports Planner"
+    "default_title": "Sports Planner",
+    "default_icon": {
+      "16": "icons/icon512.png",
+      "32": "icons/icon512.png"
+    }
   },
+
   "host_permissions": [
     "https://raw.githubusercontent.com/*"
   ]

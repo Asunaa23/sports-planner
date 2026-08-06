@@ -1,34 +1,41 @@
-const DATA_URL =
-  "https://raw.githubusercontent.com/Asunaa23/sports-planner/main/data/nba/schedule.json";
+const DATA_URL =  "https://raw.githubusercontent.com/Asunaa23/sports-planner/main/data/nba/schedule.json";
 
 const statusElement = document.getElementById("status");
 const gamesElement = document.getElementById("games");
+const selectedDateLabel =
+  document.getElementById("selected-date-label");
 
 const filterToggle = document.getElementById("filter-toggle");
+const filterLabel = document.getElementById("filter-label");
 const filterPanel = document.getElementById("filter-panel");
 const teamList = document.getElementById("team-list");
 const teamSearch = document.getElementById("team-search");
 const clearFilter = document.getElementById("clear-filter");
 
+const dateStrip = document.getElementById("date-strip");
+const previousDay = document.getElementById("previous-day");
+const nextDay = document.getElementById("next-day");
+
 let schedule = null;
 let selectedTeams = [];
+let selectedDate = null;
 
 // --------------------------------------------------
-// Dates / local timezone
+// Dates / timezone
 // --------------------------------------------------
-
-function formatDay(date) {
-  return new Intl.DateTimeFormat(undefined, {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  }).format(date);
-}
 
 function formatTime(date) {
   return new Intl.DateTimeFormat(undefined, {
     hour: "2-digit",
     minute: "2-digit",
+  }).format(date);
+}
+
+function formatSectionDate(date) {
+  return new Intl.DateTimeFormat(undefined, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
   }).format(date);
 }
 
@@ -40,24 +47,12 @@ function getLocalDateKey(date) {
   return `${year}-${month}-${day}`;
 }
 
-function groupGamesByDay(games) {
-  const groups = new Map();
+function dateFromKey(key) {
+  return new Date(`${key}T12:00:00`);
+}
 
-  for (const game of games) {
-    // datetime from our JSON is UTC.
-    // JavaScript automatically converts it to the user's local timezone.
-    const date = new Date(game.datetime);
-
-    const key = getLocalDateKey(date);
-
-    if (!groups.has(key)) {
-      groups.set(key, []);
-    }
-
-    groups.get(key).push(game);
-  }
-
-  return groups;
+function getGameDateKey(game) {
+  return getLocalDateKey(new Date(game.datetime));
 }
 
 // --------------------------------------------------
@@ -81,53 +76,43 @@ async function savePreferences() {
 }
 
 // --------------------------------------------------
-// Filters
+// Teams
 // --------------------------------------------------
-
-function isTeamSelected(abbreviation) {
-  return selectedTeams.includes(abbreviation);
-}
 
 function getFilteredGames() {
   if (!schedule) {
     return [];
   }
 
-  // No selection = show entire NBA.
   if (selectedTeams.length === 0) {
     return schedule.games;
   }
 
-  return schedule.games.filter((game) => {
-    return (
-      selectedTeams.includes(game.home.abbreviation) ||
-      selectedTeams.includes(game.away.abbreviation)
-    );
-  });
+  return schedule.games.filter((game) =>
+    selectedTeams.includes(game.home.abbreviation) ||
+    selectedTeams.includes(game.away.abbreviation)
+  );
 }
 
 function updateFilterButton() {
   if (selectedTeams.length === 0) {
-    filterToggle.firstChild.textContent =
-      "Toutes les équipes ";
-
+    filterLabel.textContent = "Toutes les équipes";
     return;
   }
 
   if (selectedTeams.length === 1) {
     const team = schedule.teams.find(
-      (team) =>
-        team.abbreviation === selectedTeams[0]
+      (team) => team.abbreviation === selectedTeams[0]
     );
 
-    filterToggle.firstChild.textContent =
-      `${team?.name ?? selectedTeams[0]} `;
+    filterLabel.textContent =
+      team?.name ?? selectedTeams[0];
 
     return;
   }
 
-  filterToggle.firstChild.textContent =
-    `${selectedTeams.length} équipes sélectionnées `;
+  filterLabel.textContent =
+    `${selectedTeams.length} équipes sélectionnées`;
 }
 
 function renderTeamList(search = "") {
@@ -135,21 +120,19 @@ function renderTeamList(search = "") {
 
   const query = search.trim().toLowerCase();
 
-  const teams = schedule.teams.filter((team) => {
-    return (
-      team.name.toLowerCase().includes(query) ||
-      team.abbreviation.toLowerCase().includes(query)
-    );
-  });
+  const teams = schedule.teams.filter((team) =>
+    team.name.toLowerCase().includes(query) ||
+    team.abbreviation.toLowerCase().includes(query)
+  );
 
   for (const team of teams) {
     const label = document.createElement("label");
     label.className = "team-option";
 
     const checkbox = document.createElement("input");
-
     checkbox.type = "checkbox";
-    checkbox.checked = isTeamSelected(team.abbreviation);
+    checkbox.checked =
+      selectedTeams.includes(team.abbreviation);
 
     checkbox.addEventListener("change", async () => {
       if (checkbox.checked) {
@@ -158,29 +141,146 @@ function renderTeamList(search = "") {
         }
       } else {
         selectedTeams = selectedTeams.filter(
-          (abbreviation) =>
-            abbreviation !== team.abbreviation
+          (value) => value !== team.abbreviation
         );
       }
 
       await savePreferences();
 
       updateFilterButton();
+      selectInitialDate();
+      renderDateStrip();
       renderGames();
     });
 
     const text = document.createElement("span");
 
-    text.innerHTML = `
-      <strong>${team.name}</strong>
-      <small>${team.abbreviation}</small>
-    `;
+    const name = document.createElement("strong");
+    name.textContent = team.name;
+
+    const abbreviation = document.createElement("small");
+    abbreviation.textContent = team.abbreviation;
+
+    text.appendChild(name);
+    text.appendChild(abbreviation);
 
     label.appendChild(checkbox);
     label.appendChild(text);
 
     teamList.appendChild(label);
   }
+}
+
+// --------------------------------------------------
+// Date navigation
+// --------------------------------------------------
+
+function getAvailableDates() {
+  return [
+    ...new Set(
+      getFilteredGames().map(getGameDateKey)
+    ),
+  ].sort();
+}
+
+function selectInitialDate() {
+  const dates = getAvailableDates();
+
+  if (dates.length === 0) {
+    selectedDate = null;
+    return;
+  }
+
+  if (selectedDate && dates.includes(selectedDate)) {
+    return;
+  }
+
+  const today = getLocalDateKey(new Date());
+
+  selectedDate =
+    dates.find((date) => date >= today) ?? dates[0];
+}
+
+function changeSelectedDate(direction) {
+  const dates = getAvailableDates();
+
+  if (!selectedDate || dates.length === 0) {
+    return;
+  }
+
+  const currentIndex = dates.indexOf(selectedDate);
+
+  const newIndex = currentIndex + direction;
+
+  if (newIndex < 0 || newIndex >= dates.length) {
+    return;
+  }
+
+  selectedDate = dates[newIndex];
+
+  renderDateStrip();
+  renderGames();
+}
+
+function renderDateStrip() {
+  dateStrip.innerHTML = "";
+
+  const dates = getAvailableDates();
+
+  if (!selectedDate || dates.length === 0) {
+    document.querySelector(".date-navigation")
+      .classList.add("hidden");
+
+    return;
+  }
+
+  document.querySelector(".date-navigation")
+    .classList.remove("hidden");
+
+  const selectedIndex = dates.indexOf(selectedDate);
+
+  const start = Math.max(
+    0,
+    Math.min(selectedIndex - 2, dates.length - 5)
+  );
+
+  const visibleDates = dates.slice(start, start + 5);
+
+  for (const dateKey of visibleDates) {
+    const date = dateFromKey(dateKey);
+
+    const button = document.createElement("button");
+    button.className = "date-item";
+
+    if (dateKey === selectedDate) {
+      button.classList.add("active");
+    }
+
+    const weekday =
+      new Intl.DateTimeFormat(undefined, {
+        weekday: "short",
+      })
+        .format(date)
+        .replace(".", "")
+        .toUpperCase();
+
+    button.innerHTML = `
+      <span>${weekday}</span>
+      <strong>${date.getDate()}</strong>
+    `;
+
+    button.addEventListener("click", () => {
+      selectedDate = dateKey;
+
+      renderDateStrip();
+      renderGames();
+    });
+
+    dateStrip.appendChild(button);
+  }
+
+  previousDay.disabled = selectedIndex === 0;
+  nextDay.disabled = selectedIndex === dates.length - 1;
 }
 
 // --------------------------------------------------
@@ -193,17 +293,49 @@ function createGameElement(game) {
 
   const date = new Date(game.datetime);
 
+  const awaySelected =
+    selectedTeams.includes(game.away.abbreviation);
+
+  const homeSelected =
+    selectedTeams.includes(game.home.abbreviation);
+
+  const isFinal =
+    String(game.status).toLowerCase() === "final";
+
+  const hasScore =
+    game.score &&
+    game.score.away !== null &&
+    game.score.home !== null;
+
+  let mainDisplay;
+  let statusDisplay;
+
+  if (isFinal && hasScore) {
+    mainDisplay =
+      `${game.score.away} — ${game.score.home}`;
+
+    statusDisplay = "FINAL";
+  } else {
+    mainDisplay = formatTime(date);
+
+    statusDisplay =
+      game.postponed
+        ? "POSTPONED"
+        : game.status || "SCHEDULED";
+  }
+
   element.innerHTML = `
-    <div class="team">
+    <div class="team ${awaySelected ? "favorite" : ""}">
       <strong>${game.away.abbreviation}</strong>
       <span>${game.away.name}</span>
     </div>
 
-    <div class="game-time">
-      ${formatTime(date)}
+    <div class="game-center">
+      <strong>${mainDisplay}</strong>
+      <span>${statusDisplay}</span>
     </div>
 
-    <div class="team">
+    <div class="team ${homeSelected ? "favorite" : ""}">
       <strong>${game.home.abbreviation}</strong>
       <span>${game.home.name}</span>
     </div>
@@ -213,21 +345,30 @@ function createGameElement(game) {
 }
 
 function renderGames() {
-  const games = getFilteredGames();
+  const filteredGames = getFilteredGames();
+
+  statusElement.textContent =
+    `${schedule.teams.length} équipes • ${filteredGames.length} matchs`;
 
   gamesElement.innerHTML = "";
 
-  statusElement.textContent =
-    `${schedule.teams.length} équipes • ${games.length} matchs`;
+  // Update the date displayed next to "MATCHS"
+  if (selectedDate) {
+    selectedDateLabel.textContent =
+      formatSectionDate(dateFromKey(selectedDate));
+  } else {
+    selectedDateLabel.textContent = "";
+  }
 
-  if (games.length === 0) {
+  // No games available with current filters
+  if (filteredGames.length === 0) {
+    selectedDateLabel.textContent = "";
+
     gamesElement.innerHTML = `
       <div class="empty-state">
         <strong>Aucun match à venir</strong>
-
         <span>
-          Aucun match n'est disponible pour cette période
-          avec les filtres actuels.
+          Aucun match n'est disponible avec les filtres actuels.
         </span>
       </div>
     `;
@@ -235,27 +376,43 @@ function renderGames() {
     return;
   }
 
-  const groups = groupGamesByDay(games);
+  // Select a valid date if none is currently selected
+  if (!selectedDate) {
+    selectInitialDate();
 
-  for (const [dateKey, dayGames] of groups) {
-    const section = document.createElement("section");
-    section.className = "day";
-
-    const date = new Date(`${dateKey}T12:00:00`);
-
-    const title = document.createElement("h2");
-    title.textContent = formatDay(date);
-
-    section.appendChild(title);
-
-    for (const game of dayGames) {
-      section.appendChild(
-        createGameElement(game)
-      );
+    if (selectedDate) {
+      selectedDateLabel.textContent =
+        formatSectionDate(dateFromKey(selectedDate));
     }
-
-    gamesElement.appendChild(section);
   }
+
+  // Only display games from the selected day
+  const games = filteredGames.filter(
+    (game) => getGameDateKey(game) === selectedDate
+  );
+
+  // Safety fallback
+  if (games.length === 0) {
+    gamesElement.innerHTML = `
+      <div class="empty-state">
+        <strong>Aucun match ce jour</strong>
+        <span>
+          Sélectionne une autre date pour afficher les matchs.
+        </span>
+      </div>
+    `;
+
+    return;
+  }
+
+  const section = document.createElement("section");
+  section.className = "day";
+
+  for (const game of games) {
+    section.appendChild(createGameElement(game));
+  }
+
+  gamesElement.appendChild(section);
 }
 
 // --------------------------------------------------
@@ -277,7 +434,18 @@ clearFilter.addEventListener("click", async () => {
 
   renderTeamList(teamSearch.value);
   updateFilterButton();
+
+  selectInitialDate();
+  renderDateStrip();
   renderGames();
+});
+
+previousDay.addEventListener("click", () => {
+  changeSelectedDate(-1);
+});
+
+nextDay.addEventListener("click", () => {
+  changeSelectedDate(1);
 });
 
 // --------------------------------------------------
@@ -286,9 +454,6 @@ clearFilter.addEventListener("click", async () => {
 
 async function loadSchedule() {
   try {
-    statusElement.textContent =
-      "Chargement du calendrier...";
-
     await loadPreferences();
 
     const response = await fetch(DATA_URL);
@@ -300,27 +465,24 @@ async function loadSchedule() {
     schedule = await response.json();
 
     if (schedule.schemaVersion !== 2) {
-      throw new Error(
-        "Unsupported schedule schema."
-      );
+      throw new Error("Unsupported schedule schema.");
     }
 
-    // Remove saved teams that no longer exist.
     const validTeams = new Set(
-      schedule.teams.map(
-        (team) => team.abbreviation
-      )
+      schedule.teams.map((team) => team.abbreviation)
     );
 
     selectedTeams = selectedTeams.filter(
-      (abbreviation) =>
-        validTeams.has(abbreviation)
+      (team) => validTeams.has(team)
     );
 
     await savePreferences();
 
-    renderTeamList();
     updateFilterButton();
+    renderTeamList();
+
+    selectInitialDate();
+    renderDateStrip();
     renderGames();
 
   } catch (error) {
@@ -332,10 +494,7 @@ async function loadSchedule() {
     gamesElement.innerHTML = `
       <div class="empty-state">
         <strong>Erreur de chargement</strong>
-
-        <span>
-          Impossible de récupérer les données NBA.
-        </span>
+        <span>Impossible de récupérer les données NBA.</span>
       </div>
     `;
   }

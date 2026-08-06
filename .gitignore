@@ -1,2 +1,17 @@
+# Dependencies
 node_modules/
+
+# Environment variables / secrets
 .env
+.env.*
+!.env.example
+
+# Local development data
+extension/dev-schedule.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/

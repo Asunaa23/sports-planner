@@ -4,8 +4,21 @@ const DATA_URL =
 const statusElement = document.getElementById("status");
 const gamesElement = document.getElementById("games");
 
+const filterToggle = document.getElementById("filter-toggle");
+const filterPanel = document.getElementById("filter-panel");
+const teamList = document.getElementById("team-list");
+const teamSearch = document.getElementById("team-search");
+const clearFilter = document.getElementById("clear-filter");
+
+let schedule = null;
+let selectedTeams = [];
+
+// --------------------------------------------------
+// Dates / local timezone
+// --------------------------------------------------
+
 function formatDay(date) {
-  return new Intl.DateTimeFormat("fr-FR", {
+  return new Intl.DateTimeFormat(undefined, {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -13,7 +26,7 @@ function formatDay(date) {
 }
 
 function formatTime(date) {
-  return new Intl.DateTimeFormat("fr-FR", {
+  return new Intl.DateTimeFormat(undefined, {
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);
@@ -31,7 +44,10 @@ function groupGamesByDay(games) {
   const groups = new Map();
 
   for (const game of games) {
+    // datetime from our JSON is UTC.
+    // JavaScript automatically converts it to the user's local timezone.
     const date = new Date(game.datetime);
+
     const key = getLocalDateKey(date);
 
     if (!groups.has(key)) {
@@ -43,6 +59,133 @@ function groupGamesByDay(games) {
 
   return groups;
 }
+
+// --------------------------------------------------
+// Storage
+// --------------------------------------------------
+
+async function loadPreferences() {
+  const result = await chrome.storage.local.get([
+    "selectedTeams",
+  ]);
+
+  if (Array.isArray(result.selectedTeams)) {
+    selectedTeams = result.selectedTeams;
+  }
+}
+
+async function savePreferences() {
+  await chrome.storage.local.set({
+    selectedTeams,
+  });
+}
+
+// --------------------------------------------------
+// Filters
+// --------------------------------------------------
+
+function isTeamSelected(abbreviation) {
+  return selectedTeams.includes(abbreviation);
+}
+
+function getFilteredGames() {
+  if (!schedule) {
+    return [];
+  }
+
+  // No selection = show entire NBA.
+  if (selectedTeams.length === 0) {
+    return schedule.games;
+  }
+
+  return schedule.games.filter((game) => {
+    return (
+      selectedTeams.includes(game.home.abbreviation) ||
+      selectedTeams.includes(game.away.abbreviation)
+    );
+  });
+}
+
+function updateFilterButton() {
+  if (selectedTeams.length === 0) {
+    filterToggle.firstChild.textContent =
+      "Toutes les équipes ";
+
+    return;
+  }
+
+  if (selectedTeams.length === 1) {
+    const team = schedule.teams.find(
+      (team) =>
+        team.abbreviation === selectedTeams[0]
+    );
+
+    filterToggle.firstChild.textContent =
+      `${team?.name ?? selectedTeams[0]} `;
+
+    return;
+  }
+
+  filterToggle.firstChild.textContent =
+    `${selectedTeams.length} équipes sélectionnées `;
+}
+
+function renderTeamList(search = "") {
+  teamList.innerHTML = "";
+
+  const query = search.trim().toLowerCase();
+
+  const teams = schedule.teams.filter((team) => {
+    return (
+      team.name.toLowerCase().includes(query) ||
+      team.abbreviation.toLowerCase().includes(query)
+    );
+  });
+
+  for (const team of teams) {
+    const label = document.createElement("label");
+    label.className = "team-option";
+
+    const checkbox = document.createElement("input");
+
+    checkbox.type = "checkbox";
+    checkbox.checked = isTeamSelected(team.abbreviation);
+
+    checkbox.addEventListener("change", async () => {
+      if (checkbox.checked) {
+        if (!selectedTeams.includes(team.abbreviation)) {
+          selectedTeams.push(team.abbreviation);
+        }
+      } else {
+        selectedTeams = selectedTeams.filter(
+          (abbreviation) =>
+            abbreviation !== team.abbreviation
+        );
+      }
+
+      await savePreferences();
+
+      updateFilterButton();
+      renderGames();
+    });
+
+    const text = document.createElement("span");
+
+    text.innerHTML = `
+      <strong>${team.name}</strong>
+      <small>${team.abbreviation}</small>
+    `;
+
+    label.appendChild(checkbox);
+    label.appendChild(text);
+
+    teamList.appendChild(label);
+  }
+}
+
+// --------------------------------------------------
+// Games
+// --------------------------------------------------
 
 function createGameElement(game) {
   const element = document.createElement("div");
@@ -69,9 +212,84 @@ function createGameElement(game) {
   return element;
 }
 
+function renderGames() {
+  const games = getFilteredGames();
+
+  gamesElement.innerHTML = "";
+
+  statusElement.textContent =
+    `${schedule.teams.length} équipes • ${games.length} matchs`;
+
+  if (games.length === 0) {
+    gamesElement.innerHTML = `
+      <div class="empty-state">
+        <strong>Aucun match à venir</strong>
+
+        <span>
+          Aucun match n'est disponible pour cette période
+          avec les filtres actuels.
+        </span>
+      </div>
+    `;
+
+    return;
+  }
+
+  const groups = groupGamesByDay(games);
+
+  for (const [dateKey, dayGames] of groups) {
+    const section = document.createElement("section");
+    section.className = "day";
+
+    const date = new Date(`${dateKey}T12:00:00`);
+
+    const title = document.createElement("h2");
+    title.textContent = formatDay(date);
+
+    section.appendChild(title);
+
+    for (const game of dayGames) {
+      section.appendChild(
+        createGameElement(game)
+      );
+    }
+
+    gamesElement.appendChild(section);
+  }
+}
+
+// --------------------------------------------------
+// Events
+// --------------------------------------------------
+
+filterToggle.addEventListener("click", () => {
+  filterPanel.classList.toggle("hidden");
+});
+
+teamSearch.addEventListener("input", () => {
+  renderTeamList(teamSearch.value);
+});
+
+clearFilter.addEventListener("click", async () => {
+  selectedTeams = [];
+
+  await savePreferences();
+
+  renderTeamList(teamSearch.value);
+  updateFilterButton();
+  renderGames();
+});
+
+// --------------------------------------------------
+// Load
+// --------------------------------------------------
+
 async function loadSchedule() {
   try {
-    statusElement.textContent = "Chargement du calendrier...";
+    statusElement.textContent =
+      "Chargement du calendrier...";
+
+    await loadPreferences();
 
     const response = await fetch(DATA_URL);
 
@@ -79,52 +297,31 @@ async function loadSchedule() {
       throw new Error(`HTTP ${response.status}`);
     }
 
-    const data = await response.json();
+    schedule = await response.json();
 
-    if (data.schemaVersion !== 2) {
-      throw new Error("Unsupported schedule schema.");
+    if (schedule.schemaVersion !== 2) {
+      throw new Error(
+        "Unsupported schedule schema."
+      );
     }
 
-    statusElement.textContent =
-      `${data.teams.length} équipes • ${data.games.length} matchs`;
+    // Remove saved teams that no longer exist.
+    const validTeams = new Set(
+      schedule.teams.map(
+        (team) => team.abbreviation
+      )
+    );
 
-    gamesElement.innerHTML = "";
+    selectedTeams = selectedTeams.filter(
+      (abbreviation) =>
+        validTeams.has(abbreviation)
+    );
 
-    if (data.games.length === 0) {
-      gamesElement.innerHTML = `
-        <div class="empty-state">
-          <strong>Aucun match à venir</strong>
-          <span>
-            Le calendrier NBA n'est pas encore disponible
-            pour cette période.
-          </span>
-        </div>
-      `;
+    await savePreferences();
 
-      return;
-    }
-
-    const groups = groupGamesByDay(data.games);
-
-    for (const [dateKey, games] of groups) {
-      const section = document.createElement("section");
-      section.className = "day";
-
-      const date = new Date(`${dateKey}T12:00:00`);
-
-      const title = document.createElement("h2");
-      title.textContent = formatDay(date);
-
-      section.appendChild(title);
-
-      for (const game of games) {
-        section.appendChild(
-          createGameElement(game)
-        );
-      }
-
-      gamesElement.appendChild(section);
-    }
+    renderTeamList();
+    updateFilterButton();
+    renderGames();
 
   } catch (error) {
     console.error(error);
@@ -134,7 +331,11 @@ async function loadSchedule() {
 
     gamesElement.innerHTML = `
       <div class="empty-state">
-        Une erreur est survenue.
+        <strong>Erreur de chargement</strong>
+
+        <span>
+          Impossible de récupérer les données NBA.
+        </span>
       </div>
     `;
   }

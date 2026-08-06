@@ -10,18 +10,41 @@
 </head>
 
 <body>
-
   <main>
-    <h1>🏀 Sports Planner</h1>
+    <header>
+      <h1>🏀 Sports Planner</h1>
+      <div id="status">Chargement...</div>
+    </header>
 
-    <div id="status">
-      Chargement...
-    </div>
+    <section class="filters">
+      <button id="filter-toggle" type="button">
+        Toutes les équipes
+        <span>⌄</span>
+      </button>
+
+      <div id="filter-panel" class="filter-panel hidden">
+        <div class="filter-header">
+          <strong>Équipes</strong>
+
+          <button id="clear-filter" type="button">
+            Tout afficher
+          </button>
+        </div>
+
+        <input
+          id="team-search"
+          type="search"
+          placeholder="Rechercher une équipe..."
+          autocomplete="off"
+        >
+
+        <div id="team-list"></div>
+      </div>
+    </section>
 
     <div id="games"></div>
   </main>
 
   <script src="popup.js"></script>
-
 </body>
 </html>

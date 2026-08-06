@@ -3,6 +3,11 @@
   "name": "Sports Planner",
   "version": "0.1.0",
   "description": "See upcoming games from your favorite sports teams.",
+
+  "permissions": [
+    "storage"
+  ],
+  
   "action": {
     "default_popup": "popup.html",
     "default_title": "Sports Planner"

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-08-16T18:34:57.626Z",
+  "updatedAt": "2026-08-17T01:36:42.781Z",
   "range": {
-    "start": "2026-08-16",
-    "end": "2026-12-14"
+    "start": "2026-08-17",
+    "end": "2026-12-15"
   },
   "teams": [
     {
@@ -8296,6 +8296,52 @@
         "away": 0
       },
       "status": "2026-12-15T03:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718275,
+      "date": "2026-12-15",
+      "datetime": "2026-12-16T01:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 6,
+        "name": "Cleveland Cavaliers",
+        "abbreviation": "CLE"
+      },
+      "away": {
+        "id": 27,
+        "name": "San Antonio Spurs",
+        "abbreviation": "SAS"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-12-16T01:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718276,
+      "date": "2026-12-15",
+      "datetime": "2026-12-16T04:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 25,
+        "name": "Portland Trail Blazers",
+        "abbreviation": "POR"
+      },
+      "away": {
+        "id": 8,
+        "name": "Denver Nuggets",
+        "abbreviation": "DEN"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-12-16T04:00:00Z",
       "postseason": false,
       "postponed": false
     }

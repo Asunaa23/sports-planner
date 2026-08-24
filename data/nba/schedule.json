@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-08-23T18:35:57.860Z",
+  "updatedAt": "2026-08-24T01:39:22.075Z",
   "range": {
-    "start": "2026-08-23",
-    "end": "2026-12-21"
+    "start": "2026-08-24",
+    "end": "2026-12-22"
   },
   "teams": [
     {
@@ -9538,6 +9538,75 @@
         "away": 0
       },
       "status": "2026-12-22T03:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718332,
+      "date": "2026-12-22",
+      "datetime": "2026-12-23T00:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 30,
+        "name": "Washington Wizards",
+        "abbreviation": "WAS"
+      },
+      "away": {
+        "id": 28,
+        "name": "Toronto Raptors",
+        "abbreviation": "TOR"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-12-23T00:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718333,
+      "date": "2026-12-22",
+      "datetime": "2026-12-23T01:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 21,
+        "name": "Oklahoma City Thunder",
+        "abbreviation": "OKC"
+      },
+      "away": {
+        "id": 9,
+        "name": "Detroit Pistons",
+        "abbreviation": "DET"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-12-23T01:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718334,
+      "date": "2026-12-22",
+      "datetime": "2026-12-23T03:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 10,
+        "name": "Golden State Warriors",
+        "abbreviation": "GSW"
+      },
+      "away": {
+        "id": 7,
+        "name": "Dallas Mavericks",
+        "abbreviation": "DAL"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-12-23T03:30:00Z",
       "postseason": false,
       "postponed": false
     }

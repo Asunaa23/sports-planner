@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-09-14T21:41:18.335Z",
+  "updatedAt": "2026-09-15T04:14:27.520Z",
   "range": {
-    "start": "2026-09-14",
-    "end": "2027-01-12"
+    "start": "2026-09-15",
+    "end": "2027-01-13"
   },
   "teams": [
     {
@@ -13287,6 +13287,167 @@
         "away": 0
       },
       "status": "2027-01-13T04:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718507,
+      "date": "2027-01-13",
+      "datetime": "2027-01-14T00:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 1,
+        "name": "Atlanta Hawks",
+        "abbreviation": "ATL"
+      },
+      "away": {
+        "id": 6,
+        "name": "Cleveland Cavaliers",
+        "abbreviation": "CLE"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-14T00:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718508,
+      "date": "2027-01-13",
+      "datetime": "2027-01-14T00:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 2,
+        "name": "Boston Celtics",
+        "abbreviation": "BOS"
+      },
+      "away": {
+        "id": 20,
+        "name": "New York Knicks",
+        "abbreviation": "NYK"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-14T00:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718509,
+      "date": "2027-01-13",
+      "datetime": "2027-01-14T00:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 12,
+        "name": "Indiana Pacers",
+        "abbreviation": "IND"
+      },
+      "away": {
+        "id": 17,
+        "name": "Milwaukee Bucks",
+        "abbreviation": "MIL"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-14T00:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718510,
+      "date": "2027-01-13",
+      "datetime": "2027-01-14T00:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 28,
+        "name": "Toronto Raptors",
+        "abbreviation": "TOR"
+      },
+      "away": {
+        "id": 24,
+        "name": "Phoenix Suns",
+        "abbreviation": "PHX"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-14T00:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718511,
+      "date": "2027-01-13",
+      "datetime": "2027-01-14T02:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 21,
+        "name": "Oklahoma City Thunder",
+        "abbreviation": "OKC"
+      },
+      "away": {
+        "id": 11,
+        "name": "Houston Rockets",
+        "abbreviation": "HOU"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-14T02:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718512,
+      "date": "2027-01-13",
+      "datetime": "2027-01-14T03:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 10,
+        "name": "Golden State Warriors",
+        "abbreviation": "GSW"
+      },
+      "away": {
+        "id": 4,
+        "name": "Charlotte Hornets",
+        "abbreviation": "CHA"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-14T03:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718513,
+      "date": "2027-01-13",
+      "datetime": "2027-01-14T03:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 25,
+        "name": "Portland Trail Blazers",
+        "abbreviation": "POR"
+      },
+      "away": {
+        "id": 14,
+        "name": "Los Angeles Lakers",
+        "abbreviation": "LAL"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-14T03:00:00Z",
       "postseason": false,
       "postponed": false
     }

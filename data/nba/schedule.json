@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-09-28T23:06:15.481Z",
+  "updatedAt": "2026-09-29T05:07:06.114Z",
   "range": {
-    "start": "2026-09-28",
-    "end": "2027-01-26"
+    "start": "2026-09-29",
+    "end": "2027-01-27"
   },
   "teams": [
     {
@@ -15702,6 +15702,213 @@
         "away": 0
       },
       "status": "2027-01-27T04:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718619,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T00:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 6,
+        "name": "Cleveland Cavaliers",
+        "abbreviation": "CLE"
+      },
+      "away": {
+        "id": 9,
+        "name": "Detroit Pistons",
+        "abbreviation": "DET"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T00:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718620,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T00:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 23,
+        "name": "Philadelphia 76ers",
+        "abbreviation": "PHI"
+      },
+      "away": {
+        "id": 26,
+        "name": "Sacramento Kings",
+        "abbreviation": "SAC"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T00:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718621,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T00:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 2,
+        "name": "Boston Celtics",
+        "abbreviation": "BOS"
+      },
+      "away": {
+        "id": 13,
+        "name": "LA Clippers",
+        "abbreviation": "LAC"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T00:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718622,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T00:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 3,
+        "name": "Brooklyn Nets",
+        "abbreviation": "BKN"
+      },
+      "away": {
+        "id": 24,
+        "name": "Phoenix Suns",
+        "abbreviation": "PHX"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T00:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718623,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T00:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 28,
+        "name": "Toronto Raptors",
+        "abbreviation": "TOR"
+      },
+      "away": {
+        "id": 7,
+        "name": "Dallas Mavericks",
+        "abbreviation": "DAL"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T00:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718625,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T01:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 27,
+        "name": "San Antonio Spurs",
+        "abbreviation": "SAS"
+      },
+      "away": {
+        "id": 4,
+        "name": "Charlotte Hornets",
+        "abbreviation": "CHA"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T01:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718627,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T01:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 11,
+        "name": "Houston Rockets",
+        "abbreviation": "HOU"
+      },
+      "away": {
+        "id": 19,
+        "name": "New Orleans Pelicans",
+        "abbreviation": "NOP"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T01:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718628,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T02:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 18,
+        "name": "Minnesota Timberwolves",
+        "abbreviation": "MIN"
+      },
+      "away": {
+        "id": 8,
+        "name": "Denver Nuggets",
+        "abbreviation": "DEN"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T02:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718629,
+      "date": "2027-01-27",
+      "datetime": "2027-01-28T03:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 25,
+        "name": "Portland Trail Blazers",
+        "abbreviation": "POR"
+      },
+      "away": {
+        "id": 10,
+        "name": "Golden State Warriors",
+        "abbreviation": "GSW"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-01-28T03:00:00Z",
       "postseason": false,
       "postponed": false
     }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-10-13T13:54:34.578Z",
+  "updatedAt": "2026-10-13T22:28:31.498Z",
   "range": {
     "start": "2026-10-13",
     "end": "2027-02-10"
@@ -963,29 +963,6 @@
       "postponed": false
     },
     {
-      "id": 21717949,
-      "date": "2026-10-24",
-      "datetime": "2026-10-25T00:00:00.000Z",
-      "season": 2026,
-      "home": {
-        "id": 1,
-        "name": "Atlanta Hawks",
-        "abbreviation": "ATL"
-      },
-      "away": {
-        "id": 11,
-        "name": "Houston Rockets",
-        "abbreviation": "HOU"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "status": "2026-10-25T00:00:00Z",
-      "postseason": false,
-      "postponed": false
-    },
-    {
       "id": 21717950,
       "date": "2026-10-24",
       "datetime": "2026-10-25T00:00:00.000Z",
@@ -1028,6 +1005,29 @@
         "away": 0
       },
       "status": "2026-10-25T00:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21717949,
+      "date": "2026-10-24",
+      "datetime": "2026-10-25T00:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 1,
+        "name": "Atlanta Hawks",
+        "abbreviation": "ATL"
+      },
+      "away": {
+        "id": 11,
+        "name": "Houston Rockets",
+        "abbreviation": "HOU"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-10-25T00:30:00Z",
       "postseason": false,
       "postponed": false
     },

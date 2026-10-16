@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-10-16T11:04:39.623Z",
+  "updatedAt": "2026-10-16T16:23:51.519Z",
   "range": {
     "start": "2026-10-16",
     "end": "2027-02-13"
@@ -618,6 +618,29 @@
       "postponed": false
     },
     {
+      "id": 21717941,
+      "date": "2026-10-23",
+      "datetime": "2026-10-23T20:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 17,
+        "name": "Milwaukee Bucks",
+        "abbreviation": "MIL"
+      },
+      "away": {
+        "id": 5,
+        "name": "Chicago Bulls",
+        "abbreviation": "CHI"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-10-23T20:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
       "id": 21717862,
       "date": "2026-10-23",
       "datetime": "2026-10-23T23:00:00.000Z",
@@ -746,29 +769,6 @@
         "id": 9,
         "name": "Detroit Pistons",
         "abbreviation": "DET"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "status": "2026-10-24T00:00:00Z",
-      "postseason": false,
-      "postponed": false
-    },
-    {
-      "id": 21717941,
-      "date": "2026-10-23",
-      "datetime": "2026-10-24T00:00:00.000Z",
-      "season": 2026,
-      "home": {
-        "id": 17,
-        "name": "Milwaukee Bucks",
-        "abbreviation": "MIL"
-      },
-      "away": {
-        "id": 5,
-        "name": "Chicago Bulls",
-        "abbreviation": "CHI"
       },
       "score": {
         "home": 0,

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-10-20T16:38:31.645Z",
+  "updatedAt": "2026-10-20T21:26:51.374Z",
   "range": {
     "start": "2026-10-20",
     "end": "2027-02-17"
@@ -265,10 +265,10 @@
         "abbreviation": "BOS"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 112,
+        "away": 101
       },
-      "status": "2026-10-20T19:00:00Z",
+      "status": "4th Qtr",
       "postseason": false,
       "postponed": false
     },

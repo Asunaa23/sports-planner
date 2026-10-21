@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-10-20T21:26:51.374Z",
+  "updatedAt": "2026-10-21T04:03:12.476Z",
   "range": {
-    "start": "2026-10-20",
-    "end": "2027-02-17"
+    "start": "2026-10-21",
+    "end": "2027-02-18"
   },
   "teams": [
     {
@@ -249,75 +249,6 @@
     }
   ],
   "games": [
-    {
-      "id": 21717855,
-      "date": "2026-10-20",
-      "datetime": "2026-10-20T19:00:00.000Z",
-      "season": 2026,
-      "home": {
-        "id": 9,
-        "name": "Detroit Pistons",
-        "abbreviation": "DET"
-      },
-      "away": {
-        "id": 2,
-        "name": "Boston Celtics",
-        "abbreviation": "BOS"
-      },
-      "score": {
-        "home": 112,
-        "away": 101
-      },
-      "status": "4th Qtr",
-      "postseason": false,
-      "postponed": false
-    },
-    {
-      "id": 21717856,
-      "date": "2026-10-20",
-      "datetime": "2026-10-20T23:00:00.000Z",
-      "season": 2026,
-      "home": {
-        "id": 20,
-        "name": "New York Knicks",
-        "abbreviation": "NYK"
-      },
-      "away": {
-        "id": 23,
-        "name": "Philadelphia 76ers",
-        "abbreviation": "PHI"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "status": "2026-10-20T23:00:00Z",
-      "postseason": false,
-      "postponed": false
-    },
-    {
-      "id": 21717857,
-      "date": "2026-10-20",
-      "datetime": "2026-10-21T01:30:00.000Z",
-      "season": 2026,
-      "home": {
-        "id": 27,
-        "name": "San Antonio Spurs",
-        "abbreviation": "SAS"
-      },
-      "away": {
-        "id": 21,
-        "name": "Oklahoma City Thunder",
-        "abbreviation": "OKC"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "status": "2026-10-21T01:30:00Z",
-      "postseason": false,
-      "postponed": false
-    },
     {
       "id": 21717922,
       "date": "2026-10-21",
@@ -19658,6 +19589,98 @@
         "away": 0
       },
       "status": "2027-02-18T03:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718829,
+      "date": "2027-02-18",
+      "datetime": "2027-02-19T00:30:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 18,
+        "name": "Minnesota Timberwolves",
+        "abbreviation": "MIN"
+      },
+      "away": {
+        "id": 27,
+        "name": "San Antonio Spurs",
+        "abbreviation": "SAS"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-02-19T00:30:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718831,
+      "date": "2027-02-18",
+      "datetime": "2027-02-19T01:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 15,
+        "name": "Memphis Grizzlies",
+        "abbreviation": "MEM"
+      },
+      "away": {
+        "id": 2,
+        "name": "Boston Celtics",
+        "abbreviation": "BOS"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-02-19T01:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718832,
+      "date": "2027-02-18",
+      "datetime": "2027-02-19T03:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 14,
+        "name": "Los Angeles Lakers",
+        "abbreviation": "LAL"
+      },
+      "away": {
+        "id": 11,
+        "name": "Houston Rockets",
+        "abbreviation": "HOU"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-02-19T03:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718833,
+      "date": "2027-02-18",
+      "datetime": "2027-02-19T03:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 25,
+        "name": "Portland Trail Blazers",
+        "abbreviation": "POR"
+      },
+      "away": {
+        "id": 12,
+        "name": "Indiana Pacers",
+        "abbreviation": "IND"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2027-02-19T03:00:00Z",
       "postseason": false,
       "postponed": false
     }

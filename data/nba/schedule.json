@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-10-23T16:48:02.660Z",
+  "updatedAt": "2026-10-23T21:13:56.095Z",
   "range": {
     "start": "2026-10-23",
     "end": "2027-02-20"
@@ -265,10 +265,10 @@
         "abbreviation": "CHI"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 54,
+        "away": 59
       },
-      "status": "2026-10-23T20:00:00Z",
+      "status": "2nd Qtr",
       "postseason": false,
       "postponed": false
     },

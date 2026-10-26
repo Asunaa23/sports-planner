@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-10-26T12:35:36.606Z",
+  "updatedAt": "2026-10-26T22:29:51.758Z",
   "range": {
     "start": "2026-10-26",
     "end": "2027-02-23"
@@ -827,7 +827,7 @@
     {
       "id": 21717987,
       "date": "2026-10-29",
-      "datetime": "2026-10-29T23:00:00.000Z",
+      "datetime": "2026-10-30T00:00:00.000Z",
       "season": 2026,
       "home": {
         "id": 1,
@@ -843,7 +843,7 @@
         "home": 0,
         "away": 0
       },
-      "status": "2026-10-29T23:00:00Z",
+      "status": "2026-10-30T00:00:00Z",
       "postseason": false,
       "postponed": false
     },

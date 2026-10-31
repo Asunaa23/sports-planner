@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-10-31T17:11:03.596Z",
+  "updatedAt": "2026-10-31T21:15:48.580Z",
   "range": {
     "start": "2026-10-31",
     "end": "2027-02-28"
@@ -265,10 +265,10 @@
         "abbreviation": "POR"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 74,
+        "away": 97
       },
-      "status": "2026-10-31T19:00:00Z",
+      "status": "4th Qtr",
       "postseason": false,
       "postponed": false
     },

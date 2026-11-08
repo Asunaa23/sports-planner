@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-11-08T13:01:56.162Z",
+  "updatedAt": "2026-11-08T21:53:08.490Z",
   "range": {
     "start": "2026-11-08",
     "end": "2027-03-08"
@@ -265,10 +265,10 @@
         "abbreviation": "PHI"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 68,
+        "away": 71
       },
-      "status": "2026-11-08T20:30:00Z",
+      "status": "3rd Qtr",
       "postseason": false,
       "postponed": false
     },

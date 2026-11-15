@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-11-15T13:44:37.924Z",
+  "updatedAt": "2026-11-15T22:40:22.765Z",
   "range": {
     "start": "2026-11-15",
     "end": "2027-03-15"
@@ -265,10 +265,10 @@
         "abbreviation": "IND"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 131,
+        "away": 124
       },
-      "status": "2026-11-15T18:00:00Z",
+      "status": "Final",
       "postseason": false,
       "postponed": false
     },
@@ -288,10 +288,10 @@
         "abbreviation": "LAL"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 57,
+        "away": 76
       },
-      "status": "2026-11-15T21:00:00Z",
+      "status": "3rd Qtr",
       "postseason": false,
       "postponed": false
     },
@@ -311,10 +311,10 @@
         "abbreviation": "CHA"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 51,
+        "away": 52
       },
-      "status": "2026-11-15T21:30:00Z",
+      "status": "2nd Qtr",
       "postseason": false,
       "postponed": false
     },
@@ -334,10 +334,10 @@
         "abbreviation": "SAS"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 36,
+        "away": 33
       },
-      "status": "2026-11-15T22:00:00Z",
+      "status": "2nd Qtr",
       "postseason": false,
       "postponed": false
     },

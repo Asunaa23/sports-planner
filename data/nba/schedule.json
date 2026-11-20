@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-11-20T15:09:25.392Z",
+  "updatedAt": "2026-11-20T23:51:38.432Z",
   "range": {
     "start": "2026-11-20",
     "end": "2027-03-20"
@@ -2159,32 +2159,9 @@
       "postponed": false
     },
     {
-      "id": 21718232,
-      "date": "2026-12-01",
-      "datetime": "2026-12-02T03:00:00.000Z",
-      "season": 2026,
-      "home": {
-        "id": 25,
-        "name": "Portland Trail Blazers",
-        "abbreviation": "POR"
-      },
-      "away": {
-        "id": 18,
-        "name": "Minnesota Timberwolves",
-        "abbreviation": "MIN"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "status": "2026-12-02T03:00:00Z",
-      "postseason": false,
-      "postponed": false
-    },
-    {
       "id": 21718233,
       "date": "2026-12-01",
-      "datetime": "2026-12-02T04:00:00.000Z",
+      "datetime": "2026-12-02T03:00:00.000Z",
       "season": 2026,
       "home": {
         "id": 10,
@@ -2195,6 +2172,29 @@
         "id": 29,
         "name": "Utah Jazz",
         "abbreviation": "UTA"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "2026-12-02T03:00:00Z",
+      "postseason": false,
+      "postponed": false
+    },
+    {
+      "id": 21718232,
+      "date": "2026-12-01",
+      "datetime": "2026-12-02T04:00:00.000Z",
+      "season": 2026,
+      "home": {
+        "id": 25,
+        "name": "Portland Trail Blazers",
+        "abbreviation": "POR"
+      },
+      "away": {
+        "id": 18,
+        "name": "Minnesota Timberwolves",
+        "abbreviation": "MIN"
       },
       "score": {
         "home": 0,

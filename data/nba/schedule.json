@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-11-21T06:25:58.435Z",
+  "updatedAt": "2026-11-21T18:56:11.058Z",
   "range": {
     "start": "2026-11-21",
     "end": "2027-03-21"
@@ -265,10 +265,10 @@
         "abbreviation": "MIL"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 51,
+        "away": 54
       },
-      "status": "2026-11-21T18:00:00Z",
+      "status": "2nd Qtr",
       "postseason": false,
       "postponed": false
     },

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "sport": "nba",
-  "updatedAt": "2026-11-22T14:22:39.074Z",
+  "updatedAt": "2026-11-22T23:27:52.513Z",
   "range": {
     "start": "2026-11-22",
     "end": "2027-03-22"
@@ -265,10 +265,10 @@
         "abbreviation": "DET"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 107,
+        "away": 97
       },
-      "status": "2026-11-22T20:30:00Z",
+      "status": "Final",
       "postseason": false,
       "postponed": false
     },
@@ -288,10 +288,10 @@
         "abbreviation": "OKC"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 22,
+        "away": 14
       },
-      "status": "2026-11-22T23:00:00Z",
+      "status": "1st Qtr",
       "postseason": false,
       "postponed": false
     },
